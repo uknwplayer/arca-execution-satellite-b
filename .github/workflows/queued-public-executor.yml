@@ -1,0 +1,57 @@
+name: ARCA Satellite B Queued Public Executor Linux
+run-name: ARCA Satellite B Linux Queue ${{ github.sha }}
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'queue/requests/*.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: arca-satellite-b-linux-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout satellite B
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate bounded contract
+        run: PYTHONPATH=. python -m unittest discover -s tests -v
+      - name: Resolve exactly one queued request
+        id: request
+        shell: bash
+        run: |
+          mapfile -t files < <(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" -- 'queue/requests/*.json')
+          if [ "${#files[@]}" -ne 1 ]; then
+            echo "Expected exactly one queued request in the dispatch commit." >&2
+            exit 1
+          fi
+          echo "path=${files[0]}" >> "$GITHUB_OUTPUT"
+      - name: Execute queued bounded profile
+        env:
+          REQUEST_FILE: ${{ steps.request.outputs.path }}
+          ARCA_EXECUTOR_ID: github-satellite-b-linux
+        run: |
+          PYTHONPATH=. python -m executor.queue --request-file "$REQUEST_FILE" --output execution-result.json
+      - name: Hash result
+        run: sha256sum execution-result.json
+      - name: Upload result artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: arca-satellite-b-linux-result-${{ github.run_id }}
+          path: execution-result.json
+          if-no-files-found: error
+          retention-days: 7
