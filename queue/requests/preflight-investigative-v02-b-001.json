@@ -1,0 +1,15 @@
+{
+  "schema": "arca.public-investigative-executor-request.v0.2",
+  "profile": "investigative-public-v0.1",
+  "request_id": "preflight-investigative-v02-b-001",
+  "public_only": true,
+  "secrets_allowed": false,
+  "task_class": "PUBLIC_SOURCE_NORMALIZATION",
+  "task_input": {
+    "source_class": "official_public_fixture",
+    "fields": [
+      "document_id",
+      "locator"
+    ]
+  }
+}
