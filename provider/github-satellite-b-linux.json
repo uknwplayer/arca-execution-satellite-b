@@ -2,8 +2,8 @@
   "schema": "arca.execution-provider.v0.1",
   "executor_id": "github-satellite-b-linux",
   "provider_family": "github-git-queue-b",
-  "trust_state": "EXPERIMENTAL_UNVERIFIED",
-  "admission_state": "LAB_CANDIDATE",
+  "trust_state": "EXPERIMENTAL_VERIFIED",
+  "admission_state": "LAB_ADMITTED",
   "visibility": "public",
   "repository": "uknwplayer/arca-execution-satellite-b",
   "execution_domain": "arca-execution-satellite-b",
@@ -17,6 +17,14 @@
     "core_promotion": false
   },
   "evidence": {
-    "status": "AWAITING_FIRST_LIVE_PROOF"
+    "status": "LIVE_VERIFIED",
+    "proof_id": "satellite-b-first-live-001",
+    "dispatch_commit_sha": "241773e54b758dfe526f9ef57c6d6503eb4d3070",
+    "run_id": "35524173932",
+    "job_id": "106113325110",
+    "conclusion": "success",
+    "artifact_id": "10608759876",
+    "artifact_digest": "sha256:5fa40a5a9293365712e60a74ebda037cb5db957f6eb31b65f2c273e51ac0c7e5",
+    "result_sha256": "2e3627a7e0219f73000bea5c7a85e80ca6e754a0b3ded8433bcf5fc79f8571c4"
   }
 }
