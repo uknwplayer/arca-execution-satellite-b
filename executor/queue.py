@@ -9,7 +9,7 @@ from .contract import ExecutionRequest
 from .run import execute_request
 
 
-REQUEST_SCHEMA = "arca.public-executor-request.v0.1"
+REQUEST_SCHEMA_V1 = "arca.public-executor-request.v0.1"\nREQUEST_SCHEMA_V2 = "arca.public-investigative-executor-request.v0.2"
 REQUEST_KEYS = frozenset({
     "schema",
     "profile",
@@ -25,9 +25,11 @@ def load_request(path: Path) -> tuple[ExecutionRequest, dict]:
 
     if not isinstance(data, dict):
         raise ValueError("request must be a JSON object")
-    if set(data) != REQUEST_KEYS:
-        raise ValueError("request keys do not match the v0.1 contract")
-    if data["schema"] != REQUEST_SCHEMA:
+    schema = data.get("schema")
+    expected_keys = REQUEST_KEYS_V2 if schema == REQUEST_SCHEMA_V2 else REQUEST_KEYS_V1
+    if set(data) != expected_keys:
+        raise ValueError("request keys do not match the declared contract")
+    if schema not in {REQUEST_SCHEMA_V1, REQUEST_SCHEMA_V2}:
         raise ValueError("unsupported request schema")
     if data["public_only"] is not True:
         raise ValueError("queued public jobs must declare public_only=true")
@@ -37,6 +39,8 @@ def load_request(path: Path) -> tuple[ExecutionRequest, dict]:
     request = ExecutionRequest(
         profile=data["profile"],
         request_id=data["request_id"],
+        task_class=data.get("task_class"),
+        task_input=data.get("task_input", {}),
     )
     request.validate()
 
