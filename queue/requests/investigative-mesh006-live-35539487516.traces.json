@@ -1,0 +1,15 @@
+{
+  "profile": "investigative-public-v0.1",
+  "public_only": true,
+  "request_id": "investigative-mesh006-live-35539487516.traces",
+  "schema": "arca.public-investigative-executor-request.v0.2",
+  "secrets_allowed": false,
+  "task_class": "ABSTRACT_TRACE_EXTRACTION",
+  "task_input": {
+    "observations": [
+      "TRACE-PUBLIC-AMOUNT",
+      "TRACE-PUBLIC-ID",
+      "TRACE-PUBLIC-TIME"
+    ]
+  }
+}
