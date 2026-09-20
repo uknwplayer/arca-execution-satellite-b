@@ -1,0 +1,22 @@
+{
+  "schema": "arca.execution-provider.v0.1",
+  "executor_id": "github-satellite-b-linux",
+  "provider_family": "github-git-queue-b",
+  "trust_state": "EXPERIMENTAL_UNVERIFIED",
+  "admission_state": "LAB_CANDIDATE",
+  "visibility": "public",
+  "repository": "uknwplayer/arca-execution-satellite-b",
+  "execution_domain": "arca-execution-satellite-b",
+  "capabilities": ["python.runtime","os.linux","artifact.upload","sha256","profile.smoke","profile.python-unit"],
+  "queue_prefix": "queue/requests",
+  "restrictions": {
+    "arbitrary_shell_input": false,
+    "private_repository_material": false,
+    "secrets": false,
+    "core_mutation": false,
+    "core_promotion": false
+  },
+  "evidence": {
+    "status": "AWAITING_FIRST_LIVE_PROOF"
+  }
+}
