@@ -1,0 +1,17 @@
+{
+  "profile": "investigative-public-v0.1",
+  "public_only": true,
+  "request_id": "investigative-mesh006-live-35539487516.typology",
+  "schema": "arca.public-investigative-executor-request.v0.2",
+  "secrets_allowed": false,
+  "task_class": "TYPOLOGY_MATCHING",
+  "task_input": {
+    "signals": [
+      "RF-SYNTH-LOW-COMPETITION"
+    ],
+    "typology_indicators": [
+      "RF-SYNTH-LOW-COMPETITION",
+      "RF-SYNTH-OWNERSHIP-OPACITY"
+    ]
+  }
+}
