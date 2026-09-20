@@ -1,0 +1,7 @@
+{
+  "profile": "smoke",
+  "public_only": true,
+  "request_id": "arca-mesh005-live-failover-004",
+  "schema": "arca.public-executor-request.v0.1",
+  "secrets_allowed": false
+}
