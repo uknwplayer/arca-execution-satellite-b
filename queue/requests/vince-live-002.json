@@ -1,0 +1,7 @@
+{
+  "profile": "smoke",
+  "public_only": true,
+  "request_id": "vince-live-002",
+  "schema": "arca.public-executor-request.v0.1",
+  "secrets_allowed": false
+}
